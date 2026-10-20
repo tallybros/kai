@@ -3,7 +3,7 @@ const BOT   = require('../bot.config');
 
 const SYSTEM_PROMPT = BOT.prompt + (BOT.knowledge ? `\n\n---\n\n## KNOWLEDGE BASE\n\n${BOT.knowledge}` : '');
 const API   = BOT.api   || 'anthropic';
-const MODEL = BOT.model || (API === 'openai' ? 'gpt-4o-mini' : 'claude-haiku-4-5-20251001');
+const MODEL = BOT.model || (API === 'openai' ? 'gpt-6-luna' : 'claude-haiku-4-5-20251001');
 
 async function callAnthropic(messages, apiKey) {
   const body = {
@@ -35,7 +35,7 @@ async function callOpenAI(messages, apiKey) {
     input:        messages,
   };
   if (BOT.webSearch) {
-    body.tools = [{ type: 'web_search_preview' }];
+    body.tools = [{ type: 'web_search' }];
   }
   const payload = JSON.stringify(body);
   const result  = await httpsPost('api.openai.com', '/v1/responses', payload, {
