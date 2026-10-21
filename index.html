@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bot</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -14,8 +14,8 @@
   --surface:   #ffffff;
   --navy:      #1a2340;
   --navy2:     #2d3a5e;
-  --accent:    #e8764a;
-  --accent-bg: #fdf0ea;
+  --accent:    #7C3AED;
+  --accent-bg: #F3E8FF;
   --text:      #1a2340;
   --muted:     #5a6480;
   --hint:      #9aa0b5;
@@ -28,7 +28,7 @@
 html, body { height: 100%; }
 
 body {
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Oxanium', system-ui, sans-serif;
   background: var(--bg);
   display: flex;
   justify-content: center;
@@ -85,15 +85,15 @@ body {
 .online-dot {
   position: absolute; bottom: 1px; right: 1px;
   width: 11px; height: 11px;
-  background: #3ec97e;
+  background: #17D9DA;
   border-radius: 50%;
   border: 2px solid var(--surface);
 }
 
 .header-text h1 {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Orbitron', sans-serif;
   font-size: 19px;
-  font-weight: 400;
+  font-weight: 700;
   color: var(--navy);
   line-height: 1.2;
 }
@@ -114,7 +114,7 @@ body {
   font-weight: 500;
   padding: 4px 10px;
   border-radius: 20px;
-  border: 1px solid rgba(232,118,74,0.25);
+  border: 1px solid rgba(124,58,237,0.25);
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -243,7 +243,7 @@ body {
 
 .starter:hover {
   background: var(--accent-bg);
-  border-color: rgba(232,118,74,0.3);
+  border-color: rgba(124,58,237,0.3);
   color: var(--accent);
 }
 
@@ -274,7 +274,7 @@ textarea {
   background: transparent;
   resize: none;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 15px;
   color: var(--text);
   line-height: 1.5;
   outline: none;
@@ -288,7 +288,7 @@ textarea::placeholder { color: var(--hint); }
 .send {
   width: 34px; height: 34px;
   border-radius: 50%;
-  background: var(--navy);
+  background: var(--accent);
   border: none;
   cursor: pointer;
   display: flex; align-items: center; justify-content: center;
@@ -296,7 +296,7 @@ textarea::placeholder { color: var(--hint); }
   transition: background 0.15s, transform 0.1s;
 }
 
-.send:hover { background: var(--navy2); }
+.send:hover { background: #6D28D9; }
 .send:active { transform: scale(0.95); }
 .send:disabled { background: var(--border); cursor: default; }
 
@@ -342,7 +342,7 @@ textarea::placeholder { color: var(--hint); }
     <div class="input-row">
       <textarea
         id="input"
-        placeholder="Type a message…"
+        placeholder="say something…"
         rows="1"
         onkeydown="onKey(event)"
         oninput="resize(this)"
@@ -371,7 +371,7 @@ async function loadConfig() {
       document.title = cfg.name;
     }
     if (cfg.credit) {
-      document.getElementById('footer-note').textContent = cfg.credit;
+      document.getElementById('footer-note').innerHTML = cfg.credit;
     }
 
     if (cfg.tagline) {
@@ -558,7 +558,7 @@ function onKey(e) {
 
   showTyping();
   try {
-    const greeting = await callAPI('Hello! Please greet me warmly, introduce yourself briefly, and ask what I\'d like to know.');
+    const greeting = await callAPI('[The user just opened the chat. Start the conversation in your own voice.]');
     removeTyping();
     addMsg('bot', greeting);
   } catch(e) {
